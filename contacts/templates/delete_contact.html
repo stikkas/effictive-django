@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block header %}
+    Удаление контакта
+{% endblock %}
+{% block content %}
+    <p>Вы в самом деле хотите удалить контакт '{{ contact }}'</p>
+    <form action="{% url 'contacts-delete' pk=contact.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Да"/>
+        <a href="{% url 'contacts-list' %}">Нет, я ошибся</a>
+    </form>
+{% endblock %}
+{% block navigation %}
+{% endblock %}

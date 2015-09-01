@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<html>
+<head>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+    <div class="container">
+        {% block topnav %}
+            {% if user.is_anonymous %}
+                <a class="navbar-text navbar-right" href="{% url 'django.contrib.auth.views.login' %}">login</a>
+            {% else %}
+                <nav class="navbar">
+                    <span class="navbar-brand">{{ user }}</span>
+                    <a class="navbar-text navbar-right" href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
+                </nav>
+            {% endif %}
+        {% endblock %}
+        <h1 class="text-primary row">{% block header %}{% endblock %}</h1>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-2">
+                {% block navigation %}
+                    <a href="{% url 'contacts-list' %}" class="btn btn-default">Вернуться</a>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

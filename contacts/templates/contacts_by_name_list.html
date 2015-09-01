@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block header %}
+    Контакты, которые содержат '{{ name }}':
+{% endblock %}
+{% block content %}
+<ul>
+    {% for contact in object_list %}
+        <li class="contact">{{ contact }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+{% block navigation %}
+<a class="add-contact" href="{% url 'contacts-new' %}">Добавить контакт</a>
+{% endblock %}

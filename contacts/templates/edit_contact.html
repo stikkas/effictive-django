@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load myfilters %}
+{% block header %}
+    {% if contact.id %}
+        Редактировать запись
+    {% else %}
+        Создать новую запись
+    {% endif %}
+{% endblock %}
+{% block content %}
+<form action="{{ action }}" method="post">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+        <ul class="text-danger">
+        {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {# <ul>{{ form.as_ul }}</ul> #}
+    {% for field in form %}
+        <div id="{{ field.auto_id }}_container" class="form-group form-inline">
+            {{ field.help_text }}
+            <div>
+                {{ field.label_tag }}: {{ field|addcss:'form-control' }}
+            </div>
+            <div id="{{ field.auto_id }}_errors" class="text-danger">
+                {{ field.errors }}
+            </div>
+        </div>
+    {% endfor %}
+    <input id="save_contact" type="submit" class="btn btn-success" value="Выполнить"/>
+</form>
+{% endblock %}
+{% block navigation %}
+    <div class="btn-group">
+    {% if contact.id %}
+        <a href="{% url 'contacts-edit-addresses' pk=contact.id %}" class="btn btn-default">Редактировать адреса</a>
+        <a href="{% url 'contacts-delete' pk=contact.id %}" class="btn btn-default">Удалить</a>
+    {% endif %}
+    {{ block.super }}
+    </div>
+{% endblock %}
+

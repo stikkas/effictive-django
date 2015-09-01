@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block header %}
+    {{ contact }}
+{% endblock %}
+{% block content %}
+    <p>Email: {{ contact.email }}</p>
+    {% for address in contact.address_set.all %}
+        <ul class="list-unstyled">
+               <li>{{ address.address }}<br/>
+                   {{ address.city }} {{ address.state }}<br/>
+                   {{ address.postal_code }}
+               </li>
+        </ul>
+    {% endfor %}
+{% endblock %}

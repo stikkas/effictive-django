@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    Контакты
+{% endblock %}
+{% block content %}
+<ul>
+    {% for contact in object_list %}
+        <li class="contact">
+            <a href="{{ contact.get_absolute_url }}">{{ contact }}</a>
+            (<a href="{% url 'contacts-edit' pk=contact.id %}">Редактировать</a>)
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+{% block navigation %}
+    <a class="add-contact" href="{% url 'contacts-new' %}">Добавить контакт</a>
+{% endblock %}
