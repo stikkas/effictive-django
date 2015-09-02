@@ -11,6 +11,7 @@ from contacts.models import Contact
 from contacts.views import ListContactView
 from contacts import forms
 
+
 class SimpleTest(TestCase):
     def test_basic_addition(self):
         """
